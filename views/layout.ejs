@@ -1,96 +1,299 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!--
-        For demonstration purposes, the `title` is dynamically set here based on
-        your `sails.config.appName` to show that you can inject data into layouts
-        exactly the same way as with your other view templates.
-    -->
-    <title><%- title %></title>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Viewport mobile tag for sensible mobile support -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Bitkey - Koop en verkoop bitcoins</title>
 
-    <!--
+    <!-- Bootstrap core CSS -->
+    <link href="/styles/exchange.css" rel="stylesheet">
 
-      Stylesheets
-      ========================
-
-      You can link any CSS, LESS, or image files in your `assets` directory
-      as you would normally: using <link/> tags.
-      
-    -->
-
-    <!--
-
-      Support for LESS included by default
-      ================================================
-
-      LESS files are automatically compiled when they change using the Gruntfile
-      located in the top-level of this Sails app.  If you run into issues with styles
-      not reloading, check the Sails log output in your console for LESS compilation errors.
-      If necessary, shut down and then lift your app again.
-      
-    -->
-
-  </head>
-
-  <body>
-
-    <!-- Include the view file for the current controller/route -->
-    <%- body %>
-
-
-    <!--
-
-      Client-side Javascript
-      ========================
-
-      You can import any js files in your `assets` directory as you would 
-      normally: using <script></script> tags.
-
-      Here's an example of importing a few dependencies, in order:
-    -->
-    <!-- Bring in the socket.io client -->
-    <script type="text/javascript" src="/js/socket.io.js"></script>
-    <!-- then beef it up with some convenience logic for talking to Sails.js -->
-    <script type="text/javascript" src="/js/sails.io.js"></script>
-    <!-- listen on socket.io for incoming messages -->
-    <script type="text/javascript" src="/js/app.js"></script>
-
-    <!-- Your scripts here? -->
-    <!-- Your scripts here? -->
-    <!-- Your scripts here? -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+<!--%- body %-->
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo-container" href="#"><img src="/images/logo.png"> </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
-    <!--
+<div class="heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading exchange-options">
+                        <ul class="nav nav-tabs exchange-tabs">
+                            <li class="active">
+                                <a href="#buy" data-toggle="tab" class="exchange-tab">Bitcoins Kopen</a>
+                            </li>
+                            <li>
+                                <a href="#sell" data-toggle="tab" class="exchange-tab">Bitcoins Verkopen</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="buy">
 
-      Looking for client-side CoffeeScript or TypeScript?
-      ================================================
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="bitcoins" class="col-sm-1 control-label">
+                                            <span class="bitcoin">BTC</span>
+                                        </label>
 
-      CoffeeScript and TypeScript precompilation are not installed by default,
-      but if you'd like to mix those features in, it is straightforward to
-      `npm install` the relevant grunt community modules and modify your Gruntfile
-      to use them.
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="bitcoins" placeholder="Aantal bitcoins...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bitcoins" class="col-sm-1 control-label">
+                                            <span class="glyphicon-euro"></span>
+                                        </label>
 
-    -->
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="bitcoins">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-10">
+                                            <button type="submit" class="btn btn-default">Nu kopen</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="tab-pane" id="sell">
+
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="bitcoins" class="col-sm-1 control-label">
+                                            <span class="bitcoin">BTC</span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="bitcoins"
+                                                   placeholder="Aantal bitcoins...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bitcoins" class="col-sm-1 control-label">
+                                            <span class="glyphicon-euro"></span>
+                                        </label>
+
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="bitcoins">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-10">
+                                            <button type="submit" class="btn btn-default">Nu verkopen</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon-pencil"></span> Laatste nieuws</h3>
+                    </div>
+                    <div class="panel-body">
+                        <dl class="dl-horizontal latest-articles">
+                            <dt class="date">23-10-2013</dt>
+                            <dd class="link"><a>Negers zijn nog steeds zwart!</a></dd>
+
+                            <dt class="date">22-10-2013</dt>
+                            <dd class="link"><a>Deze website begint ergens op te lijken</a></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <!--
+<div class="container marketing">
 
-      Another way: The Asset Linker
-      ========================
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="/images/ideal.png" alt="ideal">
 
-      Sails supports a Grunt-based asset linker, to automatically inject 
-      <link> and <script> tags, as well any client-side templates you're using
-      into your HTML layouts and views, respecting dependencies.
+            <h2>iDeal betalingen</h2>
 
-      You created this Sails app with the asset linker disabled.
-      If you change your mind, check out the docs on the subject:
-      http://sailsjs.org/#!documentation/asset-management
+            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh
+                ultricies
+                vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                commodo
+                cursus magna.</p>
 
-    -->
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="/images/secure.png" alt="Veilige transacties">
 
-    </body>
+            <h2>Veilig</h2>
+
+            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec
+                elit. Cras
+                mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor
+                mauris
+                condimentum nibh.</p>
+
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="/images/bitcoin.png" alt="Bitcoin professionals">
+
+            <h2>Bitcoin professionals</h2>
+
+            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum
+                id ligula
+                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                condimentum nibh,
+                ut fermentum massa justo sit amet risus.</p>
+
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+    <!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">First featurette heading. <span
+                        class="text-muted">It'll blow your mind.</span></h2>
+
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                felis
+                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                dapibus,
+                tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive" src="http://placehold.it/500x500"
+                 alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive" src="http://placehold.it/500x500"
+                 alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+            <h2 class="featurette-heading">Oh yeah, it's that good. <span
+                        class="text-muted">See for yourself.</span></h2>
+
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                felis
+                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                dapibus,
+                tellus ac cursus commodo.</p>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span>
+            </h2>
+
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta
+                felis
+                euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce
+                dapibus,
+                tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive" src="http://placehold.it/500x500"
+                 alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+
+        <p>&copy; 2013 BitKey B.V. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    </footer>
+
+</div>
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/jquery/jquery.min.js"></script>
+<script src="/js/tab.js"></script>
+<script src="/js/collapse.js"></script>
+</body>
 </html>
+

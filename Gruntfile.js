@@ -1,21 +1,20 @@
 /**
  * Gruntfile
  *
- * If you created your Sails app with `sails new foo --linker`, 
+ * If you created your Sails app with `sails new foo --linker`,
  * the following files will be automatically injected (in order)
  * into the EJS and HTML files in your `views` and `assets` folders.
  *
  * At the top part of this file, you'll find a few of the most commonly
  * configured options, but Sails' integration with Grunt is also fully
- * customizable.  If you'd like to work with your assets differently 
+ * customizable.  If you'd like to work with your assets differently
  * you can change this file to do anything you like!
  *
  * More information on using Grunt to work with static assets:
  * http://gruntjs.com/configuring-tasks
  */
 
-module.exports = function (grunt) {
-
+module.exports = function(grunt) {
 
 
   /**
@@ -23,8 +22,8 @@ module.exports = function (grunt) {
    * (uses Grunt-style wildcard/glob/splat expressions)
    *
    * By default, Sails also supports LESS in development and production.
-   * To use SASS/SCSS, Stylus, etc., edit the `sails-linker:devStyles` task 
-   * below for more options.  For this to work, you may need to install new 
+   * To use SASS/SCSS, Stylus, etc., edit the `sails-linker:devStyles` task
+   * below for more options.  For this to work, you may need to install new
    * dependencies, e.g. `npm install grunt-contrib-sass`
    */
 
@@ -37,7 +36,7 @@ module.exports = function (grunt) {
    * Javascript files to inject in order
    * (uses Grunt-style wildcard/glob/splat expressions)
    *
-   * To use client-side CoffeeScript, TypeScript, etc., edit the 
+   * To use client-side CoffeeScript, TypeScript, etc., edit the
    * `sails-linker:devJs` task below for more options.
    */
 
@@ -67,8 +66,8 @@ module.exports = function (grunt) {
    * Client-side HTML templates are injected using the sources below
    * The ordering of these templates shouldn't matter.
    * (uses Grunt-style wildcard/glob/splat expressions)
-   * 
-   * By default, Sails uses JST templates and precompiles them into 
+   *
+   * By default, Sails uses JST templates and precompiles them into
    * functions for you.  If you want to use jade, handlebars, dust, etc.,
    * edit the relevant sections below.
    */
@@ -76,7 +75,6 @@ module.exports = function (grunt) {
   var templateFilesToInject = [
     'linker/**/*.html'
   ];
-
 
 
   /////////////////////////////////////////////////////////////////
@@ -106,17 +104,17 @@ module.exports = function (grunt) {
   /////////////////////////////////////////////////////////////////
 
   // Modify css file injection paths to use 
-  cssFilesToInject = cssFilesToInject.map(function (path) {
+  cssFilesToInject = cssFilesToInject.map(function(path) {
     return '.tmp/public/' + path;
   });
 
   // Modify js file injection paths to use 
-  jsFilesToInject = jsFilesToInject.map(function (path) {
+  jsFilesToInject = jsFilesToInject.map(function(path) {
     return '.tmp/public/' + path;
   });
-  
-  
-  templateFilesToInject = templateFilesToInject.map(function (path) {
+
+
+  templateFilesToInject = templateFilesToInject.map(function(path) {
     return 'assets/' + path;
   });
 
@@ -142,21 +140,62 @@ module.exports = function (grunt) {
       dev: {
         files: [
           {
-          expand: true,
-          cwd: './assets',
-          src: ['**/*.!(coffee)'],
-          dest: '.tmp/public'
-        }
+            expand: true,
+            cwd: './assets',
+            src: ['**/*.!(coffee)'],
+            dest: '.tmp/public'
+          },
+
+          {
+            expand: true,
+            cwd: './components',
+            src: [
+              'jquery/jquery.min.js',
+              'jquery/jquery.min.map'
+              //, 'bootstrap/js'
+            ],
+            dest: '.tmp/public'
+          },
+
+          {
+            expand: true,
+            cwd: './client/src',
+            src: [
+              'images/*'
+              //, 'bootstrap/js'
+            ],
+            dest: '.tmp/public'
+          },
+
+          {
+            expand: true,
+            cwd: './client/src',
+            src: [
+              'fonts/*'
+              //, 'bootstrap/js'
+            ],
+            dest: '.tmp/public'
+          },
+
+          {
+            expand: true,
+            cwd: './components/bootstrap',
+            src: [
+              'fonts/*', 'js/tab.js',
+              'fonts/*', 'js/collapse.js'
+            ],
+            dest: '.tmp/public'
+          }
         ]
       },
       build: {
         files: [
           {
-          expand: true,
-          cwd: '.tmp/public',
-          src: ['**/*'],
-          dest: 'www'
-        }
+            expand: true,
+            cwd: '.tmp/public',
+            src: ['**/*'],
+            dest: 'www'
+          }
         ]
       }
     },
@@ -186,26 +225,27 @@ module.exports = function (grunt) {
       dev: {
         files: [
           {
-          expand: true,
-          cwd: 'assets/styles/',
-          src: ['*.less'],
-          dest: '.tmp/public/styles/',
-          ext: '.css'
-        }, {
-          expand: true,
-          cwd: 'assets/linker/styles/',
-          src: ['*.less'],
-          dest: '.tmp/public/linker/styles/',
-          ext: '.css'
-        }
+            expand: true,
+            cwd: 'client/src/less/',
+            src: ['exchange.less'],
+            dest: '.tmp/public/styles/',
+            ext: '.css'
+          },
+          {
+            expand: true,
+            cwd: 'assets/linker/styles/',
+            src: ['*.less'],
+            dest: '.tmp/public/linker/styles/',
+            ext: '.css'
+          }
         ]
       }
     },
-    
+
     coffee: {
       dev: {
-        options:{
-          bare:true
+        options: {
+          bare: true
         },
         files: [
           {
@@ -214,7 +254,8 @@ module.exports = function (grunt) {
             src: ['**/*.coffee'],
             dest: '.tmp/public/js/',
             ext: '.js'
-          }, {
+          },
+          {
             expand: true,
             cwd: 'assets/linker/js/',
             src: ['**/*.coffee'],
@@ -404,7 +445,7 @@ module.exports = function (grunt) {
       assets: {
 
         // Assets to watch:
-        files: ['assets/**/*'],
+        files: ['assets/**/*', 'client/src/**/*'],
 
         // When assets are changed:
         tasks: ['compileAssets', 'linkAssets']
@@ -423,7 +464,7 @@ module.exports = function (grunt) {
     'clean:dev',
     'jst:dev',
     'less:dev',
-    'copy:dev',    
+    'copy:dev',
     'coffee:dev'
   ]);
 

@@ -153,14 +153,9 @@
 
     });
   }
-  
-
-
-
 }) (
 
   // In case you're wrapping socket.io to prevent pollution of the global namespace,
   // you can replace `window.io` with your own `io` here:
   window.io
-
 );
